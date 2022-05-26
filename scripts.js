@@ -20,8 +20,17 @@ function updateButton() {
     toggle.textContent = icon;
 };
 
+function skip() {
+    video.currentTime += parseFloat(this.dataset.skip);
+};
+
+function handleRangeUpdate() {
+    video[this.name] = this.value;
+};
+
 
 // hook up the event listeners
+// video play / plause
 video.addEventListener('click', togglePlay);
 video.addEventListener('play', updateButton);
 video.addEventListener('pause', updateButton);
@@ -31,3 +40,11 @@ document.body.onkeyup = function(e){
         togglePlay(); 
     }
 };
+
+// Skip buttons
+skipButtons.forEach(button => button.addEventListener('click', skip));
+
+// Ranges 
+ranges.forEach(range => range.addEventListener('change', handleRangeUpdate));
+ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate));
+ 
